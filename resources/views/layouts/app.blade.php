@@ -21,7 +21,7 @@
 
     <script>
         const api = {
-            upload_path: '{{ route('file_upload') }}',
+            new_candidate: '{{ route('new_candidate') }}',
             csrftoken: '{{ csrf_token() }}'
         }
     </script>

@@ -18,4 +18,4 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/candidates', 'CandidatesController@index')->name('candidates');
 
-Route::post('/api/upload', 'FormController@upload')->name('file_upload');
+Route::post('/api/candidate/new', 'FormController@new_candidate')->name('new_candidate');
