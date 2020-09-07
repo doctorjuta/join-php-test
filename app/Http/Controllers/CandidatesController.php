@@ -24,7 +24,10 @@ class CandidatesController extends Controller
      */
     public function index()
     {
-        $candidates = Candidates::all();
-        return view('candidates', ['candidates' => $candidates]);
+        $candidates = Candidates::orderBy('created_at', 'desc')->get();
+        return view('candidates', [
+            'candidates' => $candidates,
+            'all_states' => Candidates::get_all_states()
+        ]);
     }
 }

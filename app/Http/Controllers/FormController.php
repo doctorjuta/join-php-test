@@ -30,12 +30,9 @@ class FormController extends Controller
             $file = $request->file('candphoto');
             $hashName = $file->hashName();
             try {
-                $path = $file->storeAs(
-                    'public',
-                    $hashName,
-                    'local'
-                );
-                $candidate->photo_url = $path;
+                $img = \Image::make($file)->fit(100, 100);
+                $img->save(storage_path('app/public/'.$hashName));
+                $candidate->photo_url = 'storage/'.$hashName;
             } catch (Exception $e) {
                 return $this->sendJSONError($e->getMessage());
             }
@@ -47,13 +44,28 @@ class FormController extends Controller
 
     public function rem_candidate(Request $request)
     {
-        if ($request->has('cand_id')) {
-            $cand_id = $this->validateVal($request->input('cand_id'));
-            $candidate = Candidates::find($cand_id);
-            $candidate->delete();
-            return $this->sendJSONOk('Candidate was removed successfully.');
+        if (!$request->has('cand_id')) {
+            return $this->sendJSONError('Invalid request.');
         }
-        return $this->sendJSONError('Invalid request.');
+        $cand_id = $this->validateVal($request->input('cand_id'));
+        $candidate = Candidates::find($cand_id);
+        $candidate->delete();
+        return $this->sendJSONOk('Candidate was removed successfully.');
+    }
+
+
+    public function uptd_candidate(Request $request)
+    {
+        if (!$request->has('cand_id')) {
+            return $this->sendJSONError('Invalid request.');
+        }
+        $cand_id = $this->validateVal($request->input('cand_id'));
+        $candidate = Candidates::find($cand_id);
+        if ($request->has('new_state')) {
+            $candidate->state = $this->validateVal($request->input('new_state'));
+        }
+        $candidate->save();
+        return $this->sendJSONOk($candidate->get_state());
     }
 
 

@@ -23,6 +23,7 @@
         const api = {
             new_candidate: '{{ route('new_candidate') }}',
             rem_candidate: '{{ route('rem_candidate') }}',
+            uptd_candidate: '{{ route('uptd_candidate') }}',
             csrftoken: '{{ csrf_token() }}'
         }
     </script>
@@ -41,7 +42,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('candidates') }}">{{ __('Candidates') }}</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

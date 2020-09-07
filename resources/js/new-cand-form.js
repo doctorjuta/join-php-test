@@ -1,4 +1,5 @@
 import {renderMessage, beforeRequest, afterRequest} from './helpers';
+import IMask from 'imask';
 
 
 class NewCandidateForm {
@@ -6,6 +7,7 @@ class NewCandidateForm {
 
     constructor() {
         this.initForm();
+        this.initPhoneInput();
     }
 
 
@@ -71,9 +73,21 @@ class NewCandidateForm {
                 submitForm.reset();
                 afterRequest();
             }).catch(error => {
-                renderMessage(error.error, 'alert-danger');
+                renderMessage(error, 'alert-danger');
                 afterRequest();
             });
+        });
+    }
+
+
+    initPhoneInput() {
+        let candtel = document.getElementById('candtel');
+        if (!candtel) {
+            return;
+        }
+        const phoneMask = IMask(candtel, {
+            mask: '+{0}[0](000)000-00-00',
+            lazy: false,
         });
     }
 
