@@ -18,6 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        const api = {
+            upload_path: '{{ route('file_upload') }}',
+            csrftoken: '{{ csrf_token() }}'
+        }
+    </script>
 </head>
 <body>
     <div id="app">
@@ -72,9 +79,20 @@
             </div>
         </nav>
 
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div id="alert-section"></div>
+                </div>
+            </div>
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    @stack('scripts')
+
 </body>
 </html>

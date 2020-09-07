@@ -9,3 +9,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/form.js') }}" defer></script>
+@endpush
