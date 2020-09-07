@@ -19,3 +19,4 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/candidates', 'CandidatesController@index')->name('candidates');
 
 Route::post('/api/candidate/new', 'FormController@new_candidate')->name('new_candidate');
+Route::post('/api/candidate/remove', 'FormController@rem_candidate')->name('rem_candidate');

@@ -22,6 +22,7 @@
     <script>
         const api = {
             new_candidate: '{{ route('new_candidate') }}',
+            rem_candidate: '{{ route('rem_candidate') }}',
             csrftoken: '{{ csrf_token() }}'
         }
     </script>

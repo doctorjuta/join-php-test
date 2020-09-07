@@ -1,7 +1,7 @@
-import {renderMessage} from './helpers';
+import {renderMessage, beforeRequest, afterRequest} from './helpers';
 
 
-class CandadateForm {
+class NewCandidateForm {
 
 
     constructor() {
@@ -17,11 +17,11 @@ class CandadateForm {
             'image/webp'
         ];
         const DATA_FIELDS = [
-            'cand-email',
-            'cand-passwd',
-            'cand-fname',
-            'cand-lname',
-            'cand-tel'
+            'candemail',
+            'candpasswd',
+            'candfname',
+            'candlname',
+            'candtel'
         ];
         const MAX_FILE_SIZE = 10485760;
         const submitForm = document.getElementById('candform');
@@ -52,9 +52,12 @@ class CandadateForm {
                 formData.append('candphoto', file);
             }
             DATA_FIELDS.forEach(element => {
-                formData.append(element, element);
+                let field = document.getElementById(element);
+                if (field) {
+                    formData.append(element, field.value);
+                }
             });
-            self.beforeRequest();
+            beforeRequest();
             fetch(api.new_candidate, {
                 method: 'POST',
                 headers: {
@@ -66,26 +69,16 @@ class CandadateForm {
             .then(data => {
                 renderMessage(data.message, 'alert-success');
                 submitForm.reset();
-                self.afterRequest();
+                afterRequest();
             }).catch(error => {
                 renderMessage(error.error, 'alert-danger');
-                self.afterRequest();
+                afterRequest();
             });
         });
-    }
-
-
-    beforeRequest() {
-        document.body.classList.add('is-loading');
-    }
-
-
-    afterRequest() {
-        document.body.classList.remove('is-loading');
     }
 
 
 }
 
 
-const candadateForm = new CandadateForm();
+const newCandidateForm = new NewCandidateForm();

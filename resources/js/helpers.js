@@ -13,3 +13,13 @@ export function renderMessage(txt, cls) {
     `;
     alertSection.innerHTML += html;
 }
+
+
+export function beforeRequest() {
+    document.body.classList.add('is-loading');
+}
+
+
+export function afterRequest() {
+    document.body.classList.remove('is-loading');
+}

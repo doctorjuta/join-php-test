@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Candidates;
 
 class CandidatesController extends Controller
 {
@@ -23,6 +24,7 @@ class CandidatesController extends Controller
      */
     public function index()
     {
-        return view('candidates');
+        $candidates = Candidates::all();
+        return view('candidates', ['candidates' => $candidates]);
     }
 }

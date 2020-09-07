@@ -12,19 +12,19 @@ class FormController extends Controller
     {
         $candidate = new Candidates;
         if ($request->has('candemail')) {
-            $candidate->email = $this->validateVal($request->candemail);
+            $candidate->email = $this->validateVal($request->input('candemail'));
         }
         if ($request->has('candpasswd')) {
-            $candidate->password = Hash::make($request->candpasswd);
+            $candidate->password = Hash::make($request->input('candpasswd'));
         }
         if ($request->has('candfname')) {
-            $candidate->first_name = $this->validateVal($request->candfname);
+            $candidate->first_name = $this->validateVal($request->input('candfname'));
         }
         if ($request->has('candlname')) {
-            $candidate->last_name = $this->validateVal($request->candlname);
+            $candidate->last_name = $this->validateVal($request->input('candlname'));
         }
         if ($request->has('candtel')) {
-            $candidate->phone = $this->validateVal($request->candtel);
+            $candidate->phone = $this->validateVal($request->input('candtel'));
         }
         if ($request->hasFile('candphoto')) {
             $file = $request->file('candphoto');
@@ -42,6 +42,18 @@ class FormController extends Controller
         }
         $candidate->save();
         return $this->sendJSONOk('Form was submitted successfully.');
+    }
+
+
+    public function rem_candidate(Request $request)
+    {
+        if ($request->has('cand_id')) {
+            $cand_id = $this->validateVal($request->input('cand_id'));
+            $candidate = Candidates::find($cand_id);
+            $candidate->delete();
+            return $this->sendJSONOk('Candidate was removed successfully.');
+        }
+        return $this->sendJSONError('Invalid request.');
     }
 
 
