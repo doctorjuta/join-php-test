@@ -19,7 +19,8 @@
         "laravel/ui": "^2.2",
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "^1.1",
-        "ext-pdo_sqlite": "*"
+        "ext-pdo_sqlite": "*",
+        "ext-gd": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
