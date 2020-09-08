@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Candidates;
 
 class FormController extends Controller
@@ -31,8 +32,8 @@ class FormController extends Controller
             $hashName = $file->hashName();
             try {
                 $img = \Image::make($file)->fit(100, 100);
-                $img->save(storage_path('app/public/'.$hashName));
-                $candidate->photo_url = 'storage/'.$hashName;
+                $image_stream = $img->stream();
+                $candidate->photo_url = Storage::disk('s3')->put($hashName, $image_stream->__toString());
             } catch (Exception $e) {
                 return $this->sendJSONError($e->getMessage());
             }
