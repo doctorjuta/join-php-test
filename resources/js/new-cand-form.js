@@ -86,8 +86,7 @@ class NewCandidateForm {
             return;
         }
         const phoneMask = IMask(candtel, {
-            mask: '+{0}[0](000)000-00-00',
-            lazy: false,
+            mask: '+{0}[0](000)000-00-00'
         });
     }
 

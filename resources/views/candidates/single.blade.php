@@ -4,16 +4,27 @@
             <img src="{{ asset($item->photo_url) }}" alt="{{ $item->get_name() }}" title="{{ $item->get_name() }}">
         </div>
     @endif
-    <p>{{ $item->get_name() }}</p>
-    <p>{{ $item->email }}</p>
-    <p>{{ $item->phone }}</p>
-    <p id="candidate{{ $item->id }}-state">{{ $item->get_state() }}</p>
-    <p>Applied on <b>{{ $item->created_at }}</b></p>
-    <div class="dropdown">
-        <button type="button" class="btn candidate-list-btn dropdown-toggle" id="candidateMenu{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="5,5">...</button>
-        <div class="dropdown-menu" aria-labelledby="candidateMenu{{ $item->id }}">
-            <button class="dropdown-item candidate-remove" type="button" data-id="{{ $item->id }}">Delete</button>
-            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#candidateModal{{ $item->id }}">Change state</button>
+    <div class="candidate-list-cont">
+        @include('candidates.score')
+        @if($item->first_name && $item->last_name)
+            <p class="candidate-list-name">{{ $item->get_name() }}</p>
+        @endif
+        @if($item->email)
+            <p class="candidate-list-email">{{ $item->email }}</p>
+        @endif
+        @if($item->phone)
+            <p class="candidate-list-phone">{{ $item->phone }}</p>
+        @endif
+        <p class="candidate-list-state" id="candidate{{ $item->id }}-state">
+            @include('candidates.badge')
+        </p>
+        <p class="candidate-list-date">Applied on <b>{{ $item->created_at }}</b></p>
+        <div class="dropdown candidate-list-dropdown">
+            <button type="button" class="btn candidate-list-btn dropdown-toggle" id="candidateMenu{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="5,5">...</button>
+            <div class="dropdown-menu" aria-labelledby="candidateMenu{{ $item->id }}">
+                <button class="dropdown-item candidate-remove" type="button" data-id="{{ $item->id }}">Delete</button>
+                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#candidateModal{{ $item->id }}">Change state</button>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="candidateModal{{ $item->id }}">

@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/js/manage-cand-form.js": "/js/manage-cand-form.js",
-    "/js/new-cand-form.js": "/js/new-cand-form.js"
+    "/js/app.js": "/js/app.js?id=542f1d8845fdb5ae319f",
+    "/css/app.css": "/css/app.css?id=b59c12978d09711ab7ad",
+    "/js/manage-cand-form.js": "/js/manage-cand-form.js?id=10b58547da659c9b6590",
+    "/js/new-cand-form.js": "/js/new-cand-form.js?id=84500d915f0c79c22c19"
 }

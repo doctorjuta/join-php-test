@@ -24,5 +24,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/manage-cand-form.js') }}" defer></script>
+    <script src="{{ mix('js/manage-cand-form.js') }}" defer></script>
 @endpush

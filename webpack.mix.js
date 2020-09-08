@@ -15,3 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/new-cand-form.js', 'public/js')
     .js('resources/js/manage-cand-form.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+if (mix.inProduction()) {
+    mix.version();
+}

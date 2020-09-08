@@ -11,19 +11,19 @@ class FormController extends Controller
     public function new_candidate(Request $request)
     {
         $candidate = new Candidates;
-        if ($request->has('candemail')) {
+        if ($request->filled('candemail')) {
             $candidate->email = $this->validateVal($request->input('candemail'));
         }
-        if ($request->has('candpasswd')) {
+        if ($request->filled('candpasswd')) {
             $candidate->password = Hash::make($request->input('candpasswd'));
         }
-        if ($request->has('candfname')) {
+        if ($request->filled('candfname')) {
             $candidate->first_name = $this->validateVal($request->input('candfname'));
         }
-        if ($request->has('candlname')) {
+        if ($request->filled('candlname')) {
             $candidate->last_name = $this->validateVal($request->input('candlname'));
         }
-        if ($request->has('candtel')) {
+        if ($request->filled('candtel')) {
             $candidate->phone = $this->validateVal($request->input('candtel'));
         }
         if ($request->hasFile('candphoto')) {
@@ -65,7 +65,8 @@ class FormController extends Controller
             $candidate->state = $this->validateVal($request->input('new_state'));
         }
         $candidate->save();
-        return $this->sendJSONOk($candidate->get_state());
+        $html = view('candidates.badge', ['item' => $candidate])->render();
+        return $this->sendJSONOk($html);
     }
 
 

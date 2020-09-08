@@ -11,5 +11,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/new-cand-form.js') }}" defer></script>
+    <script src="{{ mix('js/new-cand-form.js') }}" defer></script>
 @endpush
