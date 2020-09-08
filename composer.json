@@ -67,7 +67,6 @@
         ],
         "post-install-cmd": [
             "@php artisan clear-compiled",
-            "@php artisan storage:link",
             "chmod -R 775 public/"
         ]
     }
