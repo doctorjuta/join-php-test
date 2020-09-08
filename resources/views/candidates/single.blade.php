@@ -1,7 +1,7 @@
 <div class="candidate-list-item" id="candidate{{ $item->id }}">
     @if($item->photo_url)
         <div class="candidate-list-img">
-            <img src="{{ asset($item->photo_url) }}" alt="{{ $item->get_name() }}" title="{{ $item->get_name() }}">
+            <img src="{{ $item->photo_url }}" alt="{{ $item->get_name() }}" title="{{ $item->get_name() }}">
         </div>
     @endif
     <div class="candidate-list-cont">

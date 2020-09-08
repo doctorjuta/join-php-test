@@ -31,9 +31,11 @@ class FormController extends Controller
             $file = $request->file('candphoto');
             $hashName = $file->hashName();
             try {
+                $file_name = 'joinphp/'.$hashName;
                 $img = \Image::make($file)->fit(100, 100);
                 $image_stream = $img->stream();
-                $candidate->photo_url = Storage::disk('s3')->put($hashName, $image_stream->__toString());
+                $path = Storage::disk('s3')->put($file_name, $image_stream->__toString());
+                $candidate->photo_url = Storage::disk('s3')->url($file_name);
             } catch (Exception $e) {
                 return $this->sendJSONError($e->getMessage());
             }
